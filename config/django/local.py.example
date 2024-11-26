@@ -1,0 +1,11 @@
+#from .base import *
+#from config.env import env
+
+#DEBUG
+#DEBUG = env.bool('DJANGO_DEBUG', default = False)
+
+#DATABASE
+#DATABASES = {
+#    'default': env.db('SQLITE_URL')
+#}
+#ALLOWED_HOST
