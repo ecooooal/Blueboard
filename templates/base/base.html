@@ -1,14 +1,16 @@
+{% load static tailwind_tags %}
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body class="bg-black">
-{% include 'base\header.html' %}
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+        {% tailwind_css %}
+    </head>
+        <body class="bg-black">
+        {% include 'base\header.html' %}
 
-{% block layout %}
-{% endblock %}
+        {% block layout %}
+        {% endblock %}
 
-</body>
+        </body>
 </html>
