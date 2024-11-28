@@ -7,6 +7,10 @@
 # Ignore Pycharm required files
 .idea
 
+# Ignore node.js builds
+theme/static_src/node_modules/
+
+## Django ##
 # Ignore logs
 *.log
 
@@ -15,3 +19,8 @@
 
 # Ignore the local.py settings
 config/django/local.py
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
