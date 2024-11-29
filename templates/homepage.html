@@ -1,7 +1,25 @@
 {% extends 'base/base.html' %}
 
 {% block layout %}
-
-<h1>This is where the block layout comes in</h1>
-
+{% if user.is_authenticated %}
+		<div class="container mx-auto">
+			<section class="flex flex-col items-center justify-center h-screen">
+                <h1 class="text-5xl mb-16"> Currently Authenticated!</h1>
+                    <p class="text-lg pd-16">
+                        Feel free to explore and interact with everything on this page,
+                        don't hesitate to click around and discover! Enjoy!
+                    </p>
+			</section>
+		</div>
+{% else %}
+		<div class="container mx-auto ">
+			<section class="flex flex-col items-center justify-center h-screen w-full">
+                <h1 class="text-6xl pb-16 mb-16 "> Welcome! ️</h1>
+                    <p class="text-lg ">
+                        Feel free to explore and interact with everything on this page,
+                        don't hesitate to click around and discover! Enjoy!
+                    </p>
+			</section>
+		</div>
+{% endif %}
 {% endblock %}

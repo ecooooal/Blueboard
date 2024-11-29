@@ -1,0 +1,10 @@
+<div class="mb-16">
+<h1>Log out Account</h1>
+<p>Are you sure you want to log out your account?</p>
+</div>
+
+<form action="{% url 'logout' %}" method='POST'>
+    {% csrf_token %}
+    <button type="submit" class="btn-red mt-6">Log out</button>
+    <a class="btn secondaryAction ml-1" href="{{ request.META.HTTP_REFERER }}">Cancel</a>
+</form>

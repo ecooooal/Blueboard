@@ -17,11 +17,16 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 from django.views.generic import TemplateView
+from profiles.views import *
 
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+    path("accounts/", include("django.contrib.auth.urls")),
     path("__reload__/", include("django_browser_reload.urls")),
 
     path('', TemplateView.as_view(template_name='homepage.html'), name='home'),
+    path('logout/', TemplateView.as_view(template_name='registration/logout.html'), name='account_logout'),
+    path('profile/', profile_view, name='profile')
+
 ]

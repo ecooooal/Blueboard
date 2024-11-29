@@ -42,6 +42,15 @@ module.exports = {
         // '../../**/*.py'
     ],
     theme: {
+        colors: {
+          transparent: 'transparent',
+          current: 'currentColor',
+          'primary': '#1976D2',
+          'white': '#FFFFFF',
+          'secondary': '#BBDEFB',
+          'tertiary': '#FFC670',
+          'accent': '#F490B1',
+        },
         extend: {},
     },
     plugins: [
