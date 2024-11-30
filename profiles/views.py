@@ -19,3 +19,19 @@ def profile_view(request, username=None):
     }
 
     return render(request, 'profiles/profile.html', context)
+@login_required
+def profile_detail_view(request):
+    if request.htmx:
+        return render(request, 'snippets/profile_detail_snippets.html')
+@login_required
+def profile_kanban_view(request):
+    if request.htmx:
+        return render(request, 'snippets/profile_kanban_snippets.html')
+@login_required
+def profile_account_view(request):
+    if request.htmx:
+        return render(request, 'snippets/profile_account_snippets.html')
+@login_required
+def profile_report_view(request):
+    if request.htmx:
+        return render(request, 'snippets/profile_report_snippets.html')

@@ -27,6 +27,10 @@ urlpatterns = [
 
     path('', TemplateView.as_view(template_name='homepage.html'), name='home'),
     path('logout/', TemplateView.as_view(template_name='registration/logout.html'), name='account_logout'),
-    path('profile/', profile_view, name='profile')
+    path('profile/', profile_view, name='profile'),
+    path('profile/my-profile/', profile_detail_view, name='profile_detail'),
+    path('profile/my-kanban/', profile_kanban_view, name='profile_kanban'),
+    path('profile/my-account/', profile_account_view, name='profile_account'),
+    path('profile/my-report/', profile_report_view, name='profile_report'),
 
 ]
