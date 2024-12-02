@@ -17,6 +17,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 from django.views.generic import TemplateView
+from django.conf import settings
+from django.conf.urls.static import static as thisstatic
 from profiles.views import *
 
 
@@ -26,11 +28,16 @@ urlpatterns = [
     path("__reload__/", include("django_browser_reload.urls")),
 
     path('', TemplateView.as_view(template_name='homepage.html'), name='home'),
+    path('account/login/', CustomLoginView.as_view(), name='login'),
     path('logout/', TemplateView.as_view(template_name='registration/logout.html'), name='account_logout'),
     path('profile/', profile_view, name='profile'),
+    path('<username>/', profile_view, name='user_profile'),
     path('profile/my-profile/', profile_detail_view, name='profile_detail'),
+    path('profile/my-profile/edit/', profile_detail_edit_view, name='profile_detail_edit'),
     path('profile/my-kanban/', profile_kanban_view, name='profile_kanban'),
     path('profile/my-account/', profile_account_view, name='profile_account'),
     path('profile/my-report/', profile_report_view, name='profile_report'),
 
 ]
+if settings.DEBUG:
+    urlpatterns += thisstatic(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

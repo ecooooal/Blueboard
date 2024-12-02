@@ -40,10 +40,16 @@ INSTALLED_APPS = [
 
     "profiles",
     "kanban",
+
     "tailwind",
     "theme",
     "django_browser_reload",
     "django_htmx",
+    'django.contrib.auth',
+    'django.contrib.messages',
+
+    'allauth',
+    'allauth.account',
 
 ]
 
@@ -58,6 +64,7 @@ MIDDLEWARE = [
 
     "django_browser_reload.middleware.BrowserReloadMiddleware",
     "django_htmx.middleware.HtmxMiddleware",
+    "allauth.account.middleware.AccountMiddleware",
 ]
 
 ROOT_URLCONF = "config.urls"
@@ -73,9 +80,18 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
+                'django.template.context_processors.request',
             ],
         },
     },
+]
+
+AUTHENTICATION_BACKENDS = [
+    # Needed to login by username in Django admin, regardless of `allauth`
+    'django.contrib.auth.backends.ModelBackend',
+
+    # `allauth` specific authentication methods, such as login by email
+    'allauth.account.auth_backends.AuthenticationBackend',
 ]
 
 WSGI_APPLICATION = "config.wsgi.application"

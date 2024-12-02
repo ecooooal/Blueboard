@@ -15,6 +15,8 @@ class Profile(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     is_active = models.BooleanField(default=True)
 
+    USERNAME_FIELD = 'email'
+
     def __str__(self):
         return str(self.user)
 
@@ -25,3 +27,16 @@ class Profile(models.Model):
         except:
             avatar = static('images/avatar_default.svg')
         return avatar
+
+''' 
+When Loggin in:
+    Should check if email is a pcu email
+        raise error if not
+    Should check if is_active is set to True
+        Raise error if false
+When updating:
+    Should change the last updated date
+When deactivate:
+    Should set is_active to false and then log out
+    
+'''
