@@ -13,11 +13,11 @@
                <div class="flex grow items-stretch">
                   <div class="flex flex-row gap-2">
                      <ppicture><span class="text-blue-500">Profile Picture </span> : </ppicture>
-                     <avatar><img src="{{ user.profile.profile_picture.url }}" alt="" class="text-gray-400"></img></avatar>
+                     <div><img src="{{ user.profile.avatar }}" class="text-red-400"></div>
 
                   </div>
                  <button type="button" class="ml-auto text-blue-600"
-                     >
+                     hx-get="{% url 'profile_picture_edit' %}">
                      Update
                  </button>
                </div>
@@ -36,8 +36,7 @@
                      <last-name><label class="text-gray-400">{{ profile.last_name }}</label></last-name>
                   </div>
                  <button type="button" class="ml-auto text-blue-600"
-                     hx-get="{% url 'profile_detail_edit' %}"
-                     >
+                     hx-get="{% url 'profile_detail_edit' %}">
                      Update
                  </button>
                </div>
@@ -55,7 +54,7 @@
                      <biography><label class="text-gray-400">{{ profile.bio }}</label></biography>
                   </div>
                  <button type="button" class="ml-auto text-blue-600"
-                     hx-get="/"
+                     hx-get="{% url 'profile_bio_edit' %}"
                      >
                      Update
                  </button>

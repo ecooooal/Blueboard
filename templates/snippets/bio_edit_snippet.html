@@ -1,14 +1,10 @@
-<form action="{% url 'profile_detail_edit' %}" method="post">
+<form action="{% url 'profile_bio_edit' %}" method="post">
     {% csrf_token %}
     <div class="flex m-4">
         <div class="flex gap-3 ml-4">
             <div>
-                <span class="text-xs">{{ form.first_name.label_tag }}</span>
-                {{ form.first_name }}
-            </div>
-            <div>
-                <span class="text-xs">{{ form.last_name.label_tag }}</span>
-                {{ form.last_name }}
+                <span class="text-xs">{{ form.bio.label_tag }}</span>
+                {{ form.bio }}
             </div>
         </div>
         <div class="ml-auto">

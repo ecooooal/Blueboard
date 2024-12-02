@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.templatetags.static import static
 from django.utils import timezone
+from PIL import Image
 
 
 class Profile(models.Model):
@@ -14,29 +15,8 @@ class Profile(models.Model):
     created_at = models.DateTimeField(db_index=True, default=timezone.now)
     updated_at = models.DateTimeField(auto_now=True)
     is_active = models.BooleanField(default=True)
-
     USERNAME_FIELD = 'email'
+
 
     def __str__(self):
         return str(self.user)
-
-    @property
-    def avatar(self):
-        try:
-            avatar = self.profile_picture.url
-        except:
-            avatar = static('images/avatar_default.svg')
-        return avatar
-
-''' 
-When Loggin in:
-    Should check if email is a pcu email
-        raise error if not
-    Should check if is_active is set to True
-        Raise error if false
-When updating:
-    Should change the last updated date
-When deactivate:
-    Should set is_active to false and then log out
-    
-'''

@@ -3,6 +3,8 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.http import Http404
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import LoginView
+
+
 from .models import *
 from .forms import *
 
@@ -53,6 +55,31 @@ def profile_detail_edit_view(request):
     return render(request, 'snippets/detail_edit_snippets.html', {'form': form})
 
 @login_required
+def profile_bio_edit_view(request):
+
+    if request.method == 'POST':
+        form = ProfileBioForm(request.POST, instance = request.user.profile)
+        if form.is_valid():
+            form.save()
+            return redirect('profile')
+    else:
+        form = ProfileBioForm(instance=request.user.profile)
+
+    return render(request, 'snippets/bio_edit_snippet.html', {'form': form})
+
+@login_required
+def profile_picture_edit_view(request):
+    if request.method == "POST":
+        form = ProfilePictureForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect("profile")
+    else:
+        form = ProfilePictureForm()
+    return render(request, "snippets/picture_edit_snippet.html", {"form": form})
+
+
+@login_required
 def profile_kanban_view(request):
     if request.htmx:
         return render(request, 'snippets/profile_kanban_snippets.html')
@@ -67,7 +94,7 @@ def profile_report_view(request):
 
 class CustomLoginView(LoginView):
     authentication_form = LoginForm
-    next_page = "/"
+    next_page = 'homepage.html'
 
     def user_exist(self):
         users = User.objects.all()
@@ -79,12 +106,11 @@ class CustomLoginView(LoginView):
         profile = self.request.user.profile
 
     def post(self, request, *args, **kwargs):
-        email = request.POST.get('email')
-        password = request.POST.get('password')
-        user = authenticate(request, email=email, password=password)
-        user1 = request.user
-        print(email, password, user, user1)
-        if user is None:
-            return redirect('profile')
-
-        return super().get(request, *args, **kwargs)
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(username=username, password=password)
+        if user is not None:
+            login(request, user)
+        else:
+            return redirect('homepage.html')
+        return redirect('home')

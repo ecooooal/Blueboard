@@ -45,12 +45,6 @@ INSTALLED_APPS = [
     "theme",
     "django_browser_reload",
     "django_htmx",
-    'django.contrib.auth',
-    'django.contrib.messages',
-
-    'allauth',
-    'allauth.account',
-
 ]
 
 MIDDLEWARE = [
@@ -64,7 +58,6 @@ MIDDLEWARE = [
 
     "django_browser_reload.middleware.BrowserReloadMiddleware",
     "django_htmx.middleware.HtmxMiddleware",
-    "allauth.account.middleware.AccountMiddleware",
 ]
 
 ROOT_URLCONF = "config.urls"
@@ -86,13 +79,7 @@ TEMPLATES = [
     },
 ]
 
-AUTHENTICATION_BACKENDS = [
-    # Needed to login by username in Django admin, regardless of `allauth`
-    'django.contrib.auth.backends.ModelBackend',
 
-    # `allauth` specific authentication methods, such as login by email
-    'allauth.account.auth_backends.AuthenticationBackend',
-]
 
 WSGI_APPLICATION = "config.wsgi.application"
 
@@ -150,8 +137,9 @@ TAILWIND_APP_NAME = 'theme'
 NPM_BIN_PATH = "npm.cmd"
 STATICFILES_DIRS = [BASE_DIR / "static"]
 
-LOGIN_REDIRECT_URL = '/'
-LOGOUT_REDIRECT_URL = '/'
+
+LOGIN_REDIRECT_URL = 'home'
+LOGOUT_REDIRECT_URL = 'home'
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
