@@ -1,10 +1,8 @@
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import Http404
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import LoginView
-
-
 from .models import *
 from .forms import *
 
@@ -70,12 +68,14 @@ def profile_bio_edit_view(request):
 @login_required
 def profile_picture_edit_view(request):
     if request.method == "POST":
-        form = ProfilePictureForm(request.POST, request.FILES)
+        form = ProfilePictureForm(request.POST, request.FILES,  instance=request.user.profile)
         if form.is_valid():
-            form.save()
+            profile = form.save(commit=False)
+            profile.user = request.user
+            profile.save()
             return redirect("profile")
     else:
-        form = ProfilePictureForm()
+        form = ProfilePictureForm(instance=request.user.profile)
     return render(request, "snippets/picture_edit_snippet.html", {"form": form})
 
 
@@ -91,6 +91,18 @@ def profile_account_view(request):
 def profile_report_view(request):
     if request.htmx:
         return render(request, 'snippets/profile_report_snippets.html')
+
+@login_required
+def profile_deactivate(request):
+    if request.method == "POST":
+        user = request.user
+        user.is_active = False
+        user.save()
+        logout(request)
+        redirect('home')
+    else:
+        return render(request, 'snippets/profile_deactivate_snippet.html')
+    return redirect('home')
 
 class CustomLoginView(LoginView):
     authentication_form = LoginForm
@@ -112,5 +124,5 @@ class CustomLoginView(LoginView):
         if user is not None:
             login(request, user)
         else:
-            return redirect('homepage.html')
+            return redirect('home')
         return redirect('home')

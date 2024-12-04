@@ -11,9 +11,9 @@
                      hx-target="this"
                      hx-swap="outerHTML">
                <div class="flex grow items-stretch">
-                  <div class="flex flex-row gap-2">
-                     <ppicture><span class="text-blue-500">Profile Picture </span> : </ppicture>
-                     <div><img src="{{ user.profile.avatar }}" class="text-red-400"></div>
+                  <div class="flex flex-row gap-8">
+                     <ppicture class="place-self-center"> <span class="text-blue-500">Profile Picture </span> : </ppicture>
+                     <div><img src="{{ user.profile.avatar }}" class="object-scale-down h-28 w-30"></div>
 
                   </div>
                  <button type="button" class="ml-auto text-blue-600"

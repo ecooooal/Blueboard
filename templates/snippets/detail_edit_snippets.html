@@ -3,15 +3,15 @@
     <div class="flex m-4">
         <div class="flex gap-3 ml-4">
             <div>
-                <span class="text-xs">{{ form.first_name.label_tag }}</span>
+                <span class="mb-2 text-sm font-medium text-gray-900 dark:text-white text-xs">{{ form.first_name.label_tag }}</span>
                 {{ form.first_name }}
             </div>
             <div>
-                <span class="text-xs">{{ form.last_name.label_tag }}</span>
+                <span class="mb-2 text-sm font-medium text-gray-900 dark:text-white text-xs">{{ form.last_name.label_tag }}</span>
                 {{ form.last_name }}
             </div>
         </div>
-        <div class="ml-auto">
+        <div class="ml-auto mt-5">
             <button class="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800"
                     type="submit">Update</button>
             <a class="text-gray-500 hover:text-white border border-gray-400 hover:bg-gray-500 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-gray-600 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-800"" href="{{ request.META.HTTP_REFERER }}">Cancel</a>

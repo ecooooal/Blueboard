@@ -20,3 +20,34 @@ class Profile(models.Model):
 
     def __str__(self):
         return str(self.user)
+
+    @property
+    def avatar(self):
+        try:
+            avatar = self.profile_picture.url
+        except:
+            avatar = static('images/avatar_default.svg')
+        return avatar
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+
+        img = Image.open(self.profile_picture.path)
+
+        if img.height > 300 or img.width > 300:
+            output_size = (300,300)
+            img.thumbnail(output_size)
+            img.save(self.profile_picture.path)
+
+''' 
+When Loggin in:
+    Should check if email is a pcu email
+        raise error if not
+    Should check if is_active is set to True
+        Raise error if false
+When updating:
+    Should change the last updated date
+When deactivate:
+    Should set is_active to false and then log out
+    
+'''

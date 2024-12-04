@@ -36,6 +36,7 @@ urlpatterns = [
     path('profile/my-profile/detail_edit/', profile_detail_edit_view, name='profile_detail_edit'),
     path('profile/my-profile/bio_edit/', profile_bio_edit_view, name='profile_bio_edit'),
     path('profile/my-profile/picture_edit/', profile_picture_edit_view, name='profile_picture_edit'),
+    path('profile/my-profile/deactivate/', profile_deactivate, name='profile_deactivate'),
     path('profile/my-kanban/', profile_kanban_view, name='profile_kanban'),
     path('profile/my-account/', profile_account_view, name='profile_account'),
     path('profile/my-report/', profile_report_view, name='profile_report'),
