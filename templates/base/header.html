@@ -1,17 +1,56 @@
-<header x-data="{ mobilenavOpen: false }" class="md:flex items-center justify-between [&>*]:px-8 bg-gray-800 h-20 text-white sticky top-0 z-40">
-    <div class="flex items-center justify-between h-20">
+<header hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'
+        class="flex items-center justify-between [&>*]:px-8 bg-primaryBlue h-20 text-white sticky top-0 z-40">
+    <logo-container class="flex items-center justify-between h-20">
         <logo>
-            <a class="flex items-center gap-1" href="/">
-                <span class="text-lg font-bold">WEB_APP</span>
+            <a class="flex items-center gap-2" href="/">
+                <span>(Logo Here)</span>
+                <div class="flex">
+                <span class="text-lg text-secondaryBlue font-bold">BLUE</span>
+                <span class="text-lg text-tertiaryOrange font-bold">BOARD</span>
+                </div>
             </a>
         </logo>
-    </div>
-    <div>
-        <a class="flex items-center gap-1" href="/">
-            <span class="text-lg font-bold">Log In</span>
+    </logo-container>
+    {% if user.is_authenticated %}
+    <user-container class="flex gap-5">
+        <a class="items-center font-medium rounded-lg text-sm text-center text-tertiaryOrange"
+           href="{% url 'profile' %}">
+            My Profile
         </a>
-        <a class="flex items-center gap-1" href="/">
-            <span class="text-lg font-bold">Sign Up</span>
+        <a class="items-center font-medium rounded-lg text-sm  text-center cursor-pointer"
+            hx-get="{% url 'account_logout' %}"
+            hx-trigger="click"
+            hx-target="#modalContent"
+            hx-swap="innerHTML"
+            data-modal-target="loginModal"
+            data-modal-toggle="loginModal">
+            Log out
         </a>
-    </div>
+    </user-container>
+    {% else %}
+    <user-container class="flex gap-5">
+        <a class="items-center font-medium rounded-lg text-sm  text-center text-tertiaryOrange cursor-pointer"
+            hx-get="{% url 'login' %}"
+            hx-trigger="click"
+            hx-target="#modalContent"
+            hx-swap="innerHTML"
+            data-modal-target="loginModal"
+            data-modal-toggle="loginModal">
+            Log in
+        </a>
+        <a class="items-center font-medium rounded-lg text-sm text-center cursor-pointer" href="/">
+            Sign Up
+        </a>
+    </user-container>
+    {% endif %}
 </header>
+
+<login-modal id="loginModal" tabindex="-1" aria-hidden="true" class="fixed hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+    <div id="modalBody" >
+        <!-- Modal content -->
+        <div id="modalContent" class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+        </div>
+    </div>
+</login-modal>
+
+
