@@ -1,19 +1,19 @@
 <div>
    <profile-header class="flex-col">
-      <div class="m-4 text-3xl font-semibold text-blue-500"><h1>My Profile</h1></div>
+      <div class="m-4 text-3xl font-semibold text-blue-500">My Profile</div>
       <hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700">
    </profile-header>
    <div class="mb-6">
       <ul>
           <li>
             <picture-div
-                     class="flex flex-nowrap mx-4 py-8"
+                     class="flex flex-nowrap mx-4 py-4"
                      hx-target="this"
                      hx-swap="outerHTML">
                <div class="flex grow items-stretch">
                   <div class="flex flex-row gap-8">
                      <ppicture class="place-self-center"> <span class="text-blue-500">Profile Picture </span> : </ppicture>
-                     <div><img src="{{ user.profile.avatar }}" class="object-scale-down h-28 w-30"></div>
+                     <div class=""><img src="{{ user.profile.avatar }}" class="overflow-hidden object-scale-down rounded-full w-36 h-36"></div>
 
                   </div>
                  <button type="button" class="ml-auto text-blue-600"
@@ -32,8 +32,8 @@
                <div id="nameDiv" class="flex grow items-stretch">
                   <div class="flex flex-row gap-2">
                      <full-name><span class="text-blue-500">Full Name </span> : </full-name>
-                     <first-name><label class="text-gray-400">{{ profile.first_name }}</label></first-name>
-                     <last-name><label class="text-gray-400">{{ profile.last_name }}</label></last-name>
+                     <first-name><label class="text-gray-400">{{ user.first_name }}</label></first-name>
+                     <last-name><label class="text-gray-400">{{ user.last_name }}</label></last-name>
                   </div>
                  <button type="button" class="ml-auto text-blue-600"
                      hx-get="{% url 'profile_detail_edit' %}">
@@ -54,8 +54,7 @@
                      <biography><label class="text-gray-400">{{ profile.bio }}</label></biography>
                   </div>
                  <button type="button" class="ml-auto text-blue-600"
-                     hx-get="{% url 'profile_bio_edit' %}"
-                     >
+                     hx-get="{% url 'profile_bio_edit' %}">
                      Update
                  </button>
                </div>

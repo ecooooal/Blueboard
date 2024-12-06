@@ -12,7 +12,7 @@
                      <div class="text-blue-500">Email :
                         <div class="fixed text-xs text-gray-400 ">Please contact the offices for email changing</div>
                      </div>
-                     <email-address class="text-gray-400">(Email Address)</email-address>
+                     <email-address class="text-gray-400">{{ user.email }}</email-address>
 
                   </div>
                   <a class="ml-auto text-gray-400 cursor-not-allowed" >Update</a>
@@ -27,7 +27,7 @@
                      <div class="text-blue-500">Password :
                         <div class="fixed text-xs text-gray-400">Please contact the offices for password changing</div>
                      </div>
-                     <password class="ml-auto text-gray-400">(Password)</password>
+                     <password class="ml-auto text-gray-400">*********</password>
                   </div>
                   <a class="ml-auto text-gray-400 cursor-not-allowed">Update</a>
                </div>
@@ -46,8 +46,7 @@
                      </div>
                   </div>
                  <button type="button" class="ml-auto text-red-600 mt-4"
-                     hx-get="{% url 'profile_deactivate' %}"
-                     >
+                     hx-get="{% url 'profile_deactivate' %}">
                      Deactivate
                  </button>
                </div>

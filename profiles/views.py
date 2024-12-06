@@ -4,6 +4,8 @@ from django.http import Http404, JsonResponse, HttpResponse, HttpResponseRedirec
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import LoginView
 from django.urls import reverse
+from kanban.models import *
+from kanban.selectors import *
 
 from .models import *
 from .forms import *
@@ -45,12 +47,12 @@ def profile_detail_view(request, username=None):
 def profile_detail_edit_view(request):
 
     if request.method == 'POST':
-        form = ProfileNameForm(request.POST, instance = request.user.profile)
+        form = ProfileNameForm(request.POST, instance = request.user)
         if form.is_valid():
             form.save()
             return redirect('profile')
     else:
-        form = ProfileNameForm(instance=request.user.profile)
+        form = ProfileNameForm(instance=request.user)
 
     return render(request, 'snippets/detail_edit_snippets.html', {'form': form})
 
@@ -83,8 +85,16 @@ def profile_picture_edit_view(request):
 
 @login_required
 def profile_kanban_view(request):
+    my_kanbans = get_kanbans(request.user)
+    participating_kanbans = participating_kanban(request.user)
+
+    context = {
+        'kanbans': my_kanbans,
+        'participating': participating_kanbans
+    }
+
     if request.htmx:
-        return render(request, 'snippets/profile_kanban_snippets.html')
+        return render(request, 'snippets/profile_kanban_snippets.html', context)
 @login_required
 def profile_account_view(request):
     if request.htmx:
@@ -128,18 +138,6 @@ class CustomLoginView(LoginView):
         if form.is_valid():
             user = form.get_user()
             login(request, user)
-            return redirect('login_success')
+            return redirect('home_redirect')
         else:
             return self.form_invalid(form)
-
-
-
-    """def post(self, request, *args, **kwargs):
-        username = request.POST['username']
-        password = request.POST['password']
-        user = authenticate(username=username, password=password)
-        if user is not None:
-            login(request, user)
-        else:
-            return redirect('home')
-        return redirect('home')"""

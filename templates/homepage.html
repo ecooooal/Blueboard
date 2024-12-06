@@ -2,19 +2,10 @@
 
 {% block layout %}
 {% if user.is_authenticated %}
-    {% block content %}
-        <div class="flex flex-col">
-            <h class="text-green-400">Hello your first name is {{ user.profile.first_name }} and last name is {{ user.profile.last_name }}</h>
-            <h2>Your bio says that {{ user.profile.bio }}</h2>
-            <h3>Your email is {{ user.profile.email }} and your is_active status says {{ user.is_active }}</h3>
-            <p>add kanban i created</p>
-            <p>add kanban i am member</p>
-        </div>
-    {% endblock %}
-
+        {% include 'kanban/kanban_home.html' %}
 {% else %}
-		<div class="container mx-auto ">
-			<section class="flex flex-col items-center justify-center h-screen w-full">
+		<div class="mx-auto ">
+			<section class="flex flex-col items-center justify-center h-screen w-full dark:text-white">
                 <h1 class="text-6xl pb-16 mb-16 "> Welcome! ️</h1>
                     <p class="text-lg ">
                         Feel free to explore and interact with everything on this page,
