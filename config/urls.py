@@ -28,8 +28,8 @@ urlpatterns = [
     path("accounts/", include("django.contrib.auth.urls")),
     path("__reload__/", include("django_browser_reload.urls")),
 
-    path('', TemplateView.as_view(template_name='homepage.html'), name='home'),
-    path('loginDirect', TemplateView.as_view(template_name='loadLogin.html'), name='login_success'),
+    path('', home_view, name='home'),
+    path('home_redirect/', TemplateView.as_view(template_name='home_redirect.html'), name='home_redirect'),
     path('login/', CustomLoginView.as_view(), name='login'),
     path('logout/', TemplateView.as_view(template_name='registration/logout.html'), name='account_logout'),
     path('profile/', profile_view, name='profile'),
@@ -42,6 +42,7 @@ urlpatterns = [
     path('profile/my-kanban/', profile_kanban_view, name='profile_kanban'),
     path('profile/my-account/', profile_account_view, name='profile_account'),
     path('profile/my-report/', profile_report_view, name='profile_report'),
+    path('kanban/create', create_kanban_view, name='kanban_create'),
 
 ]
 if settings.DEBUG:

@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.db import models
 from django.utils import timezone
 import uuid
@@ -13,14 +14,28 @@ class BaseModel(models.Model):
     class Meta:
         abstract = True
 
+class KanbanManager(models.Manager):
+    def for_user(self, user:User):
+        return self.filter(profile=user.profile)
+
+class KanbanMemberManager(models.Manager):
+    def participating_kanban(self, user:User):
+        kanbans = self.filter(profile=user.profile)
+        participating_kanbans = []
+        for participating_kanban in kanbans:
+            if participating_kanban.created_by != user.profile:
+                participating_kanbans.append(participating_kanban.kanban)
+        return participating_kanbans
+
 class Kanban(BaseModel):
     uuid = models.UUIDField(default=uuid.uuid4, unique=True, editable=False)
     profile = models.ForeignKey('profiles.Profile', on_delete=models.PROTECT, related_name='kanbans', null=False)
     title = models.CharField(max_length=250)
     is_public = models.BooleanField(default=False)
+    objects = KanbanManager()
 
     def __str__(self):
-        return f'{self.title} : {self.profile.first_name} {self.profile.last_name}'
+        return f'{self.title} : {self.profile.user.first_name} {self.profile.user.last_name}'
 
 class Column(BaseModel):
     kanban = models.ForeignKey('Kanban', on_delete=models.PROTECT, related_name='columns', null=False)
@@ -58,6 +73,7 @@ class KanbanMember(BaseModel):
     kanban = models.ForeignKey(Kanban, related_name="members", on_delete=models.CASCADE)
     profile = models.ForeignKey('profiles.Profile', related_name="kanban_members", on_delete=models.CASCADE)
     can_edit = models.BooleanField(default=False)
+    objects = KanbanMemberManager()
 
     class Meta:
         unique_together = ('kanban', 'profile')

@@ -1,6 +1,6 @@
 <header hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'
         class="flex items-center justify-between [&>*]:px-8 bg-primaryBlue h-20 text-white sticky top-0 z-40">
-    <logo-container class="flex items-center justify-between h-20">
+    <logo-container class="flex items-center gap-5 justify-between h-20">
         <logo>
             <a class="flex items-center gap-2" href="/">
                 <span>(Logo Here)</span>
@@ -10,6 +10,19 @@
                 </div>
             </a>
         </logo>
+        {% if user.is_authenticated %}
+        <user-container class="flex gap-5">
+            <a class="items-center font-medium rounded-lg text-sm  text-center text-tertiaryOrange cursor-pointer"
+                hx-get="{% url 'kanban_create' %}"
+                hx-trigger="click"
+                hx-target="#kanbanContent"
+                hx-swap="outerHTML"
+                data-modal-target="kanbanModal"
+                data-modal-toggle="kanbanModal">
+                + Create New Kanban board
+            </a>
+        </user-container>
+        {% endif %}
     </logo-container>
     {% if user.is_authenticated %}
     <user-container class="flex gap-5">
@@ -28,6 +41,7 @@
         </a>
     </user-container>
     {% else %}
+
     <user-container class="flex gap-5">
         <a class="items-center font-medium rounded-lg text-sm  text-center text-tertiaryOrange cursor-pointer"
             hx-get="{% url 'login' %}"
@@ -57,4 +71,16 @@
     </div>
 </login-modal>
 
+{% if user.is_authenticated %}
+<kanban-modal
+             data-modal-backdrop="static"
+             tabindex="-1"
+             aria-hidden="true"
+             class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+</kanban-modal>
 
+<div id="kanbanModal" _="on closeModal add .closing then wait for animationend then remove me" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+    <div id="kanbanContent" class="relative p-4 w-full max-w-md max-h-full">
+    </div>
+</div>
+{% endif %}

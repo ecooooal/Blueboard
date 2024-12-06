@@ -31,7 +31,7 @@
         <form method="post" hx-post="{% url 'login' %}" hx-target="#loginForm" hx-swap="outerHTML">
         {% csrf_token %}
 
-        <label for="username" class="block my-4 text-sm font-medium text-gray-900 dark:text-white">{{ form.username.label_tag }}</label>
+        <label class="block my-4 text-sm font-medium text-gray-900 dark:text-white">{{ form.username.label_tag }}</label>
             <div class="flex">
                 <span class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-e-0 border-gray-300 rounded-s-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
                     <svg class="w-16 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
@@ -41,7 +41,7 @@
                 {{ form.username }}
             </div>
 
-        <label for="password" class="block my-4 text-sm font-medium text-gray-900 dark:text-white">{{ form.password.label_tag }}</label>
+        <label class="block my-4 text-sm font-medium text-gray-900 dark:text-white">{{ form.password.label_tag }}</label>
             <div class="flex">
                 <span class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-e-0 border-gray-300 rounded-s-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
                     <svg class="w-16 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
@@ -51,7 +51,7 @@
                 {{ form.password }}
             </div>
 
-            <input class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm w-full px-5 py-2.5 mt-4 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" type="submit" value="login"></input>
+            <input class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm w-full px-5 py-2.5 mt-4 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" type="submit" value="login">
             <input type="hidden" name="next" value="{% url 'home' %}">
 
         <p><a class="text-tertiaryOrange text-sm" href="{% url 'password_reset' %}">Lost password?</a></p>

@@ -1,7 +1,109 @@
 <div>
-   <h1>My Kanban</h1>
    <ul>
-      <li>Kanban I created:</li>
-      <li>Kanban I am a member of:</li>
+      <li>
+         <div class="flex flex-col m-2 ml-2 text-2xl font-semibold text-blue-500">
+            <div class="mb-4">My Kanbans :</div>
+
+            <div class="relative  h-48 max-h-48 overflow-y-auto shadow-md sm:rounded-lg">
+                <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                    <thead class="sticky top-0 text-base text-gray-700 uppercase bg-blue-100 dark:bg-gray-700 dark:text-gray-400">
+                        <tr>
+                            <th scope="col" class="px-6 py-3">
+                                Kanban Name
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Members Count
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Cards Count
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Updated At
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Action
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                     {% for kanban in kanbans %}
+                        <tr class="bg-white border-b hover:bg-gray-50 dark:bg-gray-800 dark:border-gray-700">
+                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                 {{ kanban.title }}
+                            </th>
+                            <td class="px-6 py-4">
+                               {{ member_count }} member count
+                            </td>
+                            <td class="px-6 py-4">
+                               {{ card_count }} card count
+                            </td>
+                            <td class="px-6 py-4">
+                               {{ kanban.updated_at }}
+                            </td>
+                            <td class="px-6 py-4">
+                                <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                            </td>
+                        </tr>
+                     {% empty %}
+                     <p>No Kanban boards created yet.</p>
+                     {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+            <hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700">
+         </div>
+      </li>
+      <li>
+         <div class="flex flex-col  m-2 ml-2 text-2xl font-semibold text-blue-500">
+            <div class="mb-4">Other Kanbans I'm a Member :</div>
+            <div class="relative  h-48 max-h-48 overflow-y-auto shadow-md sm:rounded-lg">
+                <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                    <thead class="sticky top-0 text-base text-gray-700 uppercase bg-blue-100 dark:bg-gray-700 dark:text-gray-400">
+                        <tr>
+                            <th scope="col" class="px-6 py-3">
+                                Kanban Name
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Members Count
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Cards Count
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Updated At
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Action
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                     {% for kanban in participating %}
+                        <tr class="bg-white border-b hover:bg-gray-50 dark:bg-gray-800 dark:border-gray-700">
+                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                               {{ kanban.title }}
+                            </th>
+                            <td class="px-6 py-4">
+                               {{ member_count }} member count
+                            </td>
+                            <td class="px-6 py-4">
+                               {{ card_count }} card count
+                            </td>
+                            <td class="px-6 py-4">
+                               {{ kanban.updated_at }}
+                            </td>
+                            <td class="px-6 py-4">
+                                <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                            </td>
+                        </tr>
+                     {% empty %}
+                     <p>No Kanban boards created yet.</p>
+                     {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+         </div>
+      </li>
    </ul>
 </div>

@@ -1,7 +1,19 @@
-<div class="flex flex-col items-center justify-center content-start h-screen w-full">
-            <h class="text-green-400">Hello your first name is {{ user.first_name }} and last name is {{ user.last_name }}</h>
-            <h2>Your bio says that {{ user.profile.bio }}</h2>
-            <h3>Your email is {{ user.profile.email }} and your is_active status says {{ user.is_active }}</h3>
-            <p>add kanban i created</p>
-            <p>add kanban i am member</p>
+<div class="flex flex-col mt-8 mx-4 gap-6 h-full w-screen ">
+            <div class="flex flex-col  ">
+                <div>
+                    <span class="text-3xl font-semibold text-blue-600">My Kanbans :</span>
+                    <div class="m-4">
+                        {% include 'kanban/created_kanban.html' %}
+                    </div>
+            </div>
+            <div>
+                <div>
+                    <span class="text-3xl font-semibold text-blue-600">Other Kanbans I'm a Member :</span>
+                    <div class="m-4">
+                       {% include 'kanban/created_kanban.html' %}
+
+                    </div>
+                </div>
+            </div>
 </div>
+
