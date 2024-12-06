@@ -28,6 +28,7 @@ urlpatterns = [
     path("__reload__/", include("django_browser_reload.urls")),
 
     path('', TemplateView.as_view(template_name='homepage.html'), name='home'),
+    path('loginDirect', TemplateView.as_view(template_name='loadLogin.html'), name='login_success'),
     path('login/', CustomLoginView.as_view(), name='login'),
     path('logout/', TemplateView.as_view(template_name='registration/logout.html'), name='account_logout'),
     path('profile/', profile_view, name='profile'),

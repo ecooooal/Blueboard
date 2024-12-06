@@ -15,7 +15,6 @@ class Profile(models.Model):
     created_at = models.DateTimeField(db_index=True, default=timezone.now)
     updated_at = models.DateTimeField(auto_now=True)
     is_active = models.BooleanField(default=True)
-    USERNAME_FIELD = 'email'
 
 
     def __str__(self):
