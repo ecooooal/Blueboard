@@ -4,15 +4,22 @@ from .forms import *
 from .selectors import *
 
 def home_view(request):
-    kanbans = get_kanbans(request.user)
-    context = {
-        'kanbans':kanbans
-    }
-    return render(request, 'homepage.html', context)
+    if request.user.is_authenticated:
+        my_kanbans = get_kanbans(request.user)
+        participating_kanbans = participating_kanban(request.user)
+
+        context = {
+            'kanbans': my_kanbans,
+            'participating': participating_kanbans
+        }
+
+        return render(request, 'homepage.html', context)
+    else:
+        return render(request, 'homepage.html')
 
 def create_kanban_view(request):
     form = KanbanCreateForm()
-    print('hello')
+
     if request.method == 'POST':
         form = KanbanCreateForm(request.POST)
         if form.is_valid():
@@ -21,5 +28,4 @@ def create_kanban_view(request):
             kanban.save()
             return redirect('home')
     else:
-        print('raw form')
         return render(request, 'kanban/create_kanban.html', {'form':form})

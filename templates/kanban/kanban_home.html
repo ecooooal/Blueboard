@@ -1,17 +1,46 @@
 <div class="flex flex-col mt-8 mx-4 gap-6 h-full w-screen ">
             <div class="flex flex-col  ">
                 <div>
-                    <span class="text-3xl font-semibold text-blue-600">My Kanbans :</span>
+                    <span class="text-3xl font-semibold text-blue-600 dark:text-blue-300">My Kanbans :</span>
                     <div class="m-4">
-                        {% include 'kanban/created_kanban.html' %}
+                        <div class="flex flex-wrap h-56 w-full gap-5 overflow-y-auto">
+                            {% for kanban in kanbans %}
+                            <a href="#"
+                               class="overflow-hidden block w-96 h-48 my-4 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+                              <div class="flex justify-center items-center w-full h-28 bg-blue-500 dark:bg-blue-300">
+                                <svg class="w-full h-24  text-gray-200 dark:text-gray-600" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 20">
+                                      <path d="M14.066 0H7v5a2 2 0 0 1-2 2H0v11a1.97 1.97 0 0 0 1.934 2h12.132A1.97 1.97 0 0 0 16 18V2a1.97 1.97 0 0 0-1.934-2ZM10.5 6a1.5 1.5 0 1 1 0 2.999A1.5 1.5 0 0 1 10.5 6Zm2.221 10.515a1 1 0 0 1-.858.485h-8a1 1 0 0 1-.9-1.43L5.6 10.039a.978.978 0 0 1 .936-.57 1 1 0 0 1 .9.632l1.181 2.981.541-1a.945.945 0 0 1 .883-.522 1 1 0 0 1 .879.529l1.832 3.438a1 1 0 0 1-.031.988Z"/>
+                                      <path d="M5 5V.13a2.96 2.96 0 0 0-1.293.749L.879 3.707A2.98 2.98 0 0 0 .13 5H5Z"/>
+                                </svg>
+                              </div>
+                              <div class="flex h-15 w-full pt-4 justify-center items-center">
+                                  <div class="text-blue-600 dark:text-tertiaryOrange text-center text-sm font-semibold mx-4">{{ kanban.title }}</div>
+                              </div>
+                            </a>
+                            {% endfor %}
+                        </div>
                     </div>
             </div>
             <div>
                 <div>
-                    <span class="text-3xl font-semibold text-blue-600">Other Kanbans I'm a Member :</span>
+                    <span class="text-3xl font-semibold text-blue-600 dark:text-blue-300">Other Kanbans I'm a Member :</span>
                     <div class="m-4">
-                       {% include 'kanban/created_kanban.html' %}
-
+                        <div class="flex flex-wrap h-56 w-full gap-5 overflow-y-auto">
+                            {% for kanban in participating %}
+                            <a href="#"
+                               class="overflow-hidden block w-96 h-48 my-4 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+                              <div class="flex justify-center items-center w-full h-28 bg-blue-500 dark:bg-blue-300">
+                                <svg class="w-full h-24  text-gray-200 dark:text-gray-600" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 20">
+                                      <path d="M14.066 0H7v5a2 2 0 0 1-2 2H0v11a1.97 1.97 0 0 0 1.934 2h12.132A1.97 1.97 0 0 0 16 18V2a1.97 1.97 0 0 0-1.934-2ZM10.5 6a1.5 1.5 0 1 1 0 2.999A1.5 1.5 0 0 1 10.5 6Zm2.221 10.515a1 1 0 0 1-.858.485h-8a1 1 0 0 1-.9-1.43L5.6 10.039a.978.978 0 0 1 .936-.57 1 1 0 0 1 .9.632l1.181 2.981.541-1a.945.945 0 0 1 .883-.522 1 1 0 0 1 .879.529l1.832 3.438a1 1 0 0 1-.031.988Z"/>
+                                      <path d="M5 5V.13a2.96 2.96 0 0 0-1.293.749L.879 3.707A2.98 2.98 0 0 0 .13 5H5Z"/>
+                                </svg>
+                              </div>
+                              <div class="flex h-15 w-full pt-4 justify-center items-center">
+                                  <div class="text-blue-600 dark:text-tertiaryOrange text-center text-sm font-semibold mx-4">{{ kanban.kanban.title }}</div>
+                              </div>
+                            </a>
+                            {% endfor %}
+                        </div>
                     </div>
                 </div>
             </div>

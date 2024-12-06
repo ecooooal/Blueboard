@@ -1,5 +1,6 @@
 from django.contrib.auth.models import User
 from django.db import models
+from django.db.models import Count
 from django.utils import timezone
 import uuid
 
@@ -16,16 +17,14 @@ class BaseModel(models.Model):
 
 class KanbanManager(models.Manager):
     def for_user(self, user:User):
-        return self.filter(profile=user.profile)
+        return self.filter(profile=user.profile).annotate(member_count=Count('members'))
 
 class KanbanMemberManager(models.Manager):
     def participating_kanban(self, user:User):
-        kanbans = self.filter(profile=user.profile)
-        participating_kanbans = []
-        for participating_kanban in kanbans:
-            if participating_kanban.created_by != user.profile:
-                participating_kanbans.append(participating_kanban.kanban)
-        return participating_kanbans
+        return (self.filter(profile=user.profile)
+                .annotate(member_count=Count('kanban__members'))
+                .exclude(created_by=user.profile))
+
 
 class Kanban(BaseModel):
     uuid = models.UUIDField(default=uuid.uuid4, unique=True, editable=False)

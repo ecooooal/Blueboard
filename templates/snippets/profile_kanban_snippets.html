@@ -1,10 +1,10 @@
 <div>
    <ul>
       <li>
-         <div class="flex flex-col m-2 ml-2 text-2xl font-semibold text-blue-500">
+         <div class="flex flex-col m-2 ml-2  text-2xl font-semibold text-blue-500">
             <div class="mb-4">My Kanbans :</div>
 
-            <div class="relative  h-48 max-h-48 overflow-y-auto shadow-md sm:rounded-lg">
+            <div class="relative mb-2 h-48 max-h-48 overflow-y-auto shadow-md sm:rounded-lg">
                 <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                     <thead class="sticky top-0 text-base text-gray-700 uppercase bg-blue-100 dark:bg-gray-700 dark:text-gray-400">
                         <tr>
@@ -32,7 +32,7 @@
                                  {{ kanban.title }}
                             </th>
                             <td class="px-6 py-4">
-                               {{ member_count }} member count
+                               {{ kanban.member_count }}
                             </td>
                             <td class="px-6 py-4">
                                {{ card_count }} card count
@@ -50,7 +50,6 @@
                     </tbody>
                 </table>
             </div>
-
             <hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700">
          </div>
       </li>
@@ -68,7 +67,7 @@
                                 Members Count
                             </th>
                             <th scope="col" class="px-6 py-3">
-                                Cards Count
+                                Created By
                             </th>
                             <th scope="col" class="px-6 py-3">
                                 Updated At
@@ -82,13 +81,13 @@
                      {% for kanban in participating %}
                         <tr class="bg-white border-b hover:bg-gray-50 dark:bg-gray-800 dark:border-gray-700">
                             <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                               {{ kanban.title }}
+                               {{ kanban.kanban.title }}
                             </th>
                             <td class="px-6 py-4">
-                               {{ member_count }} member count
+                               {{ kanban.member_count }}
                             </td>
                             <td class="px-6 py-4">
-                               {{ card_count }} card count
+                               {{ kanban.kanban.created_by }}
                             </td>
                             <td class="px-6 py-4">
                                {{ kanban.updated_at }}
