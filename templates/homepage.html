@@ -2,15 +2,15 @@
 
 {% block layout %}
 {% if user.is_authenticated %}
-		<div class="container mx-auto">
-			<section class="flex flex-col items-center justify-center h-screen">
-                <h1 class="text-5xl mb-16"> Currently Authenticated!</h1>
-                    <p class="text-lg pd-16">
-                        Feel free to explore and interact with everything on this page,
-                        don't hesitate to click around and discover! Enjoy!
-                    </p>
-			</section>
-		</div>
+    {% block content %}
+        <div class="flex flex-col">
+            <h class="text-green-400">Hello your first name is {{ user.profile.first_name }} and last name is {{ user.profile.last_name }}</h>
+            <h2>Your bio says that {{ user.profile.bio }}</h2>
+            <h3>Your email is {{ user.profile.email }} and your is_active status says {{ user.is_active }}</h3>
+            <p>add kanban i created</p>
+            <p>add kanban i am member</p>
+        </div>
+    {% endblock %}
 
 {% else %}
 		<div class="container mx-auto ">

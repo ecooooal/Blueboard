@@ -1,12 +1,14 @@
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect, get_object_or_404
-from django.http import Http404
+from django.http import Http404, JsonResponse, HttpResponse, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import LoginView
+from django.urls import reverse
+
 from .models import *
 from .forms import *
 
-
+@login_required
 def profile_view(request, username=None):
     if username:
         profile = get_object_or_404(User, username=username).profile
@@ -108,6 +110,7 @@ class CustomLoginView(LoginView):
     authentication_form = LoginForm
     next_page = 'homepage.html'
 
+
     def user_exist(self):
         users = User.objects.all()
         if self.request in users:
@@ -117,7 +120,21 @@ class CustomLoginView(LoginView):
     def user_activate(self):
         profile = self.request.user.profile
 
+
     def post(self, request, *args, **kwargs):
+        form = self.get_form()
+        print(request.POST)
+
+        if form.is_valid():
+            user = form.get_user()
+            login(request, user)
+            return redirect('login_success')
+        else:
+            return self.form_invalid(form)
+
+
+
+    """def post(self, request, *args, **kwargs):
         username = request.POST['username']
         password = request.POST['password']
         user = authenticate(username=username, password=password)
@@ -125,4 +142,4 @@ class CustomLoginView(LoginView):
             login(request, user)
         else:
             return redirect('home')
-        return redirect('home')
+        return redirect('home')"""
