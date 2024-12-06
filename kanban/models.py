@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils import timezone
+import uuid
 
 
 class BaseModel(models.Model):
@@ -13,9 +14,13 @@ class BaseModel(models.Model):
         abstract = True
 
 class Kanban(BaseModel):
+    uuid = models.UUIDField(default=uuid.uuid4, unique=True, editable=False)
     profile = models.ForeignKey('profiles.Profile', on_delete=models.PROTECT, related_name='kanbans', null=False)
     title = models.CharField(max_length=250)
     is_public = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f'{self.title} : {self.profile.first_name} {self.profile.last_name}'
 
 class Column(BaseModel):
     kanban = models.ForeignKey('Kanban', on_delete=models.PROTECT, related_name='columns', null=False)
@@ -26,13 +31,18 @@ class Column(BaseModel):
     class Meta:
         ordering = ['position']  # Ensures columns are ordered by position in queries
 
+    def __str__(self):
+        return f'{self.kanban.title} : {self.title}'
+
 class Card(BaseModel):
     column = models.ForeignKey('Column', on_delete=models.PROTECT, related_name='cards', null=False)
     title = models.CharField(max_length=250)
     description = models.TextField()
     position = models.PositiveIntegerField()
-    card_limit = models.PositiveIntegerField()
     due_date = models.DateTimeField()
+
+    def __str__(self):
+        return f'{self.column.kanban.title} : {self.title}'
 
 class CardAttachment(BaseModel):
     card = models.ForeignKey('Card', on_delete=models.PROTECT, related_name='card_attachments', null=False)
@@ -51,3 +61,6 @@ class KanbanMember(BaseModel):
 
     class Meta:
         unique_together = ('kanban', 'profile')
+
+    def __str__(self):
+        return f'{self.profile.user.username} : {self.kanban.title} : can edit? {self.can_edit}'

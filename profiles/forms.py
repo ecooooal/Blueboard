@@ -7,7 +7,7 @@ from .models import Profile
 
 class ProfileNameForm(ModelForm):
     class Meta:
-        model = Profile
+        model = User
         fields = ['first_name', 'last_name']
         labels = {
             'first_name': 'First Name',

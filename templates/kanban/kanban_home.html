@@ -1,16 +1,7 @@
-{% extends 'base/base.html' %}
-
-{% block layout %}
-
-<h1> HELLLO</h1>
-
-
-
-
-
-
-
-
-
-
-{% endblock %}
+<div class="flex flex-col items-center justify-center content-start h-screen w-full">
+            <h class="text-green-400">Hello your first name is {{ user.first_name }} and last name is {{ user.last_name }}</h>
+            <h2>Your bio says that {{ user.profile.bio }}</h2>
+            <h3>Your email is {{ user.profile.email }} and your is_active status says {{ user.is_active }}</h3>
+            <p>add kanban i created</p>
+            <p>add kanban i am member</p>
+</div>

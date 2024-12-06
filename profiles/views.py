@@ -45,12 +45,12 @@ def profile_detail_view(request, username=None):
 def profile_detail_edit_view(request):
 
     if request.method == 'POST':
-        form = ProfileNameForm(request.POST, instance = request.user.profile)
+        form = ProfileNameForm(request.POST, instance = request.user)
         if form.is_valid():
             form.save()
             return redirect('profile')
     else:
-        form = ProfileNameForm(instance=request.user.profile)
+        form = ProfileNameForm(instance=request.user)
 
     return render(request, 'snippets/detail_edit_snippets.html', {'form': form})
 

@@ -32,8 +32,8 @@
                <div id="nameDiv" class="flex grow items-stretch">
                   <div class="flex flex-row gap-2">
                      <full-name><span class="text-blue-500">Full Name </span> : </full-name>
-                     <first-name><label class="text-gray-400">{{ profile.first_name }}</label></first-name>
-                     <last-name><label class="text-gray-400">{{ profile.last_name }}</label></last-name>
+                     <first-name><label class="text-gray-400">{{ user.first_name }}</label></first-name>
+                     <last-name><label class="text-gray-400">{{ user.last_name }}</label></last-name>
                   </div>
                  <button type="button" class="ml-auto text-blue-600"
                      hx-get="{% url 'profile_detail_edit' %}">
@@ -54,8 +54,7 @@
                      <biography><label class="text-gray-400">{{ profile.bio }}</label></biography>
                   </div>
                  <button type="button" class="ml-auto text-blue-600"
-                     hx-get="{% url 'profile_bio_edit' %}"
-                     >
+                     hx-get="{% url 'profile_bio_edit' %}">
                      Update
                  </button>
                </div>
