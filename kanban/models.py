@@ -37,8 +37,8 @@ class KanbanMemberManager(models.Manager):
     def participating_kanban(self, user:User):
         user = user.profile
         return (self.filter(profile=user)
-                .annotate(member_count=Count('kanban__members'))
-                .exclude(created_by=user))
+                .exclude(profile=user, kanban__created_by=user)
+                .annotate(member_count=Count('kanban__members')))
 
 class Kanban(BaseModel):
     uuid = models.UUIDField(default=uuid.uuid4, unique=True, editable=False)
