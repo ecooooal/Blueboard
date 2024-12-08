@@ -19,3 +19,4 @@ class KanbanCreateForm(ModelForm):
                 attrs={'class':"flex justify-center gap-5 ms-2 text-sm font-medium text-blue-500 dark:text-gray-300"}
             )
         }
+

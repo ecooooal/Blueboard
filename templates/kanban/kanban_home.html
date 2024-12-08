@@ -5,7 +5,9 @@
                     <div class="m-4">
                         <div class="flex flex-wrap h-56 w-full gap-5 overflow-y-auto">
                             {% for kanban in kanbans %}
-                            <a href="#"
+                            {% if kanban.is_active == True %}
+
+                            <a href="{% url 'kanban_page' kanban.uuid %}"
                                class="overflow-hidden block w-96 h-48 my-4 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
                               <div class="flex justify-center items-center w-full h-28 bg-blue-500 dark:bg-blue-300">
                                 <svg class="w-full h-24  text-gray-200 dark:text-gray-600" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 20">
@@ -17,6 +19,7 @@
                                   <div class="text-blue-600 dark:text-tertiaryOrange text-center text-sm font-semibold mx-4">{{ kanban.title }}</div>
                               </div>
                             </a>
+                            {% endif %}
                             {% endfor %}
                         </div>
                     </div>
@@ -27,7 +30,8 @@
                     <div class="m-4">
                         <div class="flex flex-wrap h-56 w-full gap-5 overflow-y-auto">
                             {% for kanban in participating %}
-                            <a href="#"
+                            {% if kanban.is_active == True %}
+                            <a href="{% url 'kanban_page' kanban.kanban.uuid %}"
                                class="overflow-hidden block w-96 h-48 my-4 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
                               <div class="flex justify-center items-center w-full h-28 bg-blue-500 dark:bg-blue-300">
                                 <svg class="w-full h-24  text-gray-200 dark:text-gray-600" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 20">
@@ -39,6 +43,7 @@
                                   <div class="text-blue-600 dark:text-tertiaryOrange text-center text-sm font-semibold mx-4">{{ kanban.kanban.title }}</div>
                               </div>
                             </a>
+                            {% endif %}
                             {% endfor %}
                         </div>
                     </div>

@@ -29,7 +29,7 @@
                      {% for kanban in kanbans %}
                         <tr class="bg-white border-b hover:bg-gray-50 dark:bg-gray-800 dark:border-gray-700">
                             <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                 {{ kanban.title }}
+                               {{ kanban.title|truncatechars:50 }}
                             </th>
                             <td class="px-6 py-4">
                                {{ kanban.member_count }}
@@ -81,7 +81,7 @@
                      {% for kanban in participating %}
                         <tr class="bg-white border-b hover:bg-gray-50 dark:bg-gray-800 dark:border-gray-700">
                             <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                               {{ kanban.kanban.title }}
+                               {{ kanban.kanban.title|truncatechars:50 }}
                             </th>
                             <td class="px-6 py-4">
                                {{ kanban.member_count }}
