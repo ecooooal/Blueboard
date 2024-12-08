@@ -11,8 +11,9 @@ def home_view(request):
     if request.user.is_authenticated:
         my_kanbans = get_kanbans(request.user)
         participating_kanbans = KanbanMember.objects.participating_kanban(request.user)
-        for kanban in participating_kanbans:
-            print(kanban, kanban.is_active)
+        print("My Kanbans: ", my_kanbans)  # Check the content of 'my_kanbans'
+        print("Participating Kanbans: ", participating_kanbans)  # Check the content of 'participating_kanbans'
+
         context = {
             'kanbans': my_kanbans,
             'participating': participating_kanbans
