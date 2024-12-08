@@ -1,0 +1,90 @@
+<div id="kanbanBody" xmlns="http://www.w3.org/1999/html">
+   <profile-header class="flex">
+      <div class="m-4 text-3xl font-semibold text-blue-500">{{ kanban.title }} </div>
+       <details-div  class="flex flex-nowrap grow gap-5 mt-4">
+          <member-count class="place-self-center text-xs"> <span class="text-gray-500">Members Count : {{ kanban.member_count }}</span></member-count>
+          <card-count class="place-self-center text-xs"> <span class="text-gray-500">Cards Count : {{ card_count }}</span></card-count>
+           <div class="ml-auto ">
+               <form class="max-w-sm mx-auto"
+                     method="POST"
+                     action="{% url 'add_member' kanban.uuid %}">
+                   {% csrf_token %}
+                  <div class="flex">
+                    <input id="username" name="username" id="website-admin" class="rounded-s-md text-xs  bg-gray-50 border border-gray-300 text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm px-4 py-3  mb-3 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Use PCU Email">
+                  <button
+                    type="submit"
+                    class="text-tertiaryOrange bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-small text-xs px-4 py-3 me-3 mb-3 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+                   Add Profiles
+                   </button>
+                  </div>
+                </form>
+                 {% if messages %}
+                    <ul>
+                      {% for message in messages %}
+                        <li class="{{ message.tags }}">{{ message }}</li>
+                      {% endfor %}
+                    </ul>
+                  {% endif %}
+           </div>
+       </details-div>
+   </profile-header>
+   <div class="mb-6 ">
+      <ul>
+         <li>
+            <hr class="h-px my-4 bg-gray-200 border-0 dark:bg-gray-700">
+             <div class="relative h-96 overflow-y-auto shadow-md sm:rounded-lg">
+                <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                    <thead class="sticky top-0 text-base text-gray-700 uppercase bg-blue-100 dark:bg-gray-700 dark:text-gray-400">
+                        <tr>
+                            <th scope="col" class="px-6 py-3">
+                                Profile Picture
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Name
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Email
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Updated At
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Action
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                      {% for member in kanban.members.all %}
+                        <tr class="bg-white border-b hover:bg-gray-50 dark:bg-gray-800 dark:border-gray-700">
+                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+
+                            </th>
+                            <td class="px-6 py-4 flex gap-3">
+                               <div><img src="{{ member.profile.profile_picture.url }}" class="h-16 w-16 overflow-hidden rounded-full"></div>
+                                <div class="self-center">{{ member.profile.user.first_name }} {{ member.profile.user.last_name }}</div>
+                            </td>
+                            <td class="px-6 py-4">
+                               {{ member.profile.user.email }}
+                            </td>
+                            <td class="px-6 py-4">
+                               {{ member.updated_at }}
+                            </td>
+                            <td class="px-6 py-4">
+                                {% if kanban.created_by == user.profile %}
+                                <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                                {% else %}
+                                <a class="font-medium text-gray-600 dark:text-blue-500 cursor-not-allowed">Edit</a>
+                                {% endif %}
+                            </td>
+                        </tr>
+                     {% empty %}
+                     <p>No Kanban boards created yet.</p>
+                     {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+         </li>
+      </ul>
+   </div>
+</div>
+

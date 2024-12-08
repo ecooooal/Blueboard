@@ -1,5 +1,5 @@
 <!-- Main modal -->
-<div class="relative p-4 w-full max-w-md max-h-full">
+<div id="createKanbanModal" class="relative p-4 w-full max-w-md max-h-full">
     <!-- Modal content -->
     <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
         <!-- Modal header -->
@@ -14,15 +14,22 @@
                 <span class="sr-only">Close modal</span>
             </a>
         </div>
+        <login_error>
+         {% if form.errors %}
+                  {% for field, errors in form.errors.items %}
+                        <div class="font-bold flex mt-2 justify-center text-red-500">{{ errors }}</div>
+                  {% endfor %}
+          {% endif %}
+      </login_error>
         <!-- Modal body -->
-        <form action="{% url 'kanban_create' %}" method="POST" class="p-4 md:p-5">
+        <form hx-post="{% url 'kanban_create' %}" class="p-4 md:p-5">
             {% csrf_token %}
             <div class="grid gap-4 mb-4 grid-cols-2">
                 <div class="col-span-2">
                     <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ form.title.label_tag }}</label>
                     {{ form.title }}
                 </div>
-                <div class="col-span-2">
+                <div class="flex col-span-2">
                     <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ form.is_public.label_tag }}</label>
                     {{ form.is_public }}
                 </div>

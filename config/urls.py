@@ -42,7 +42,13 @@ urlpatterns = [
     path('profile/my-kanban/', profile_kanban_view, name='profile_kanban'),
     path('profile/my-account/', profile_account_view, name='profile_account'),
     path('profile/my-report/', profile_report_view, name='profile_report'),
-    path('kanban/create', create_kanban_view, name='kanban_create'),
+    path('kanban/create/', create_kanban_view, name='kanban_create'),
+    path('kanban/page/<uuid>/', kanban_page_view, name='kanban_page'),
+    path('kanban/page/<uuid>/details/', kanban_page_detail_view, name='kanban_detail'),
+    path('kanban/page/<uuid:uuid>/edit/', kanban_edit_view, name='kanban_edit'),
+    path('kanban/page/<uuid>/delete/', kanban_delete_view, name='kanban_delete'),
+    path('kanban/page/<uuid>/add_member/', add_kanban_member_view, name='add_member'),
+
 
 ]
 if settings.DEBUG:
