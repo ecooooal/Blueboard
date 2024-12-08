@@ -10,7 +10,7 @@ def get_specific_kanban_member(user, uuid):
 
 def participating_kanban(user):
     participating_kanbans = KanbanMember.objects.participating_kanban(user)
-
+    print('adgfasdfas')
     return participating_kanbans
 
 def get_members(kanban):

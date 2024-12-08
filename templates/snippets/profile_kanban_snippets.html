@@ -15,7 +15,7 @@
                                 Members Count
                             </th>
                             <th scope="col" class="px-6 py-3">
-                                Cards Count
+                                Created At
                             </th>
                             <th scope="col" class="px-6 py-3">
                                 Updated At
@@ -35,7 +35,7 @@
                                {{ kanban.member_count }}
                             </td>
                             <td class="px-6 py-4">
-                               {{ card_count }} card count
+                               {{ kanban.created_at }}
                             </td>
                             <td class="px-6 py-4">
                                {{ kanban.updated_at }}
@@ -45,7 +45,7 @@
                             </td>
                         </tr>
                      {% empty %}
-                     <p>No Kanban boards created yet.</p>
+                     <p class="text-sm">No Kanban boards yet.</p>
                      {% endfor %}
                     </tbody>
                 </table>
@@ -67,7 +67,7 @@
                                 Members Count
                             </th>
                             <th scope="col" class="px-6 py-3">
-                                Created By
+                                Created At
                             </th>
                             <th scope="col" class="px-6 py-3">
                                 Updated At
@@ -87,7 +87,7 @@
                                {{ kanban.member_count }}
                             </td>
                             <td class="px-6 py-4">
-                               {{ kanban.kanban.created_by }}
+                               {{ kanban.kanban.created_at }}
                             </td>
                             <td class="px-6 py-4">
                                {{ kanban.updated_at }}
@@ -101,7 +101,7 @@
                             </td>
                         </tr>
                      {% empty %}
-                     <p>No Kanban boards created yet.</p>
+                     <p class="text-sm">No Kanban boards yet.</p>
                      {% endfor %}
                     </tbody>
                 </table>
