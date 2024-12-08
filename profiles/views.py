@@ -121,23 +121,21 @@ class CustomLoginView(LoginView):
     next_page = 'homepage.html'
 
 
-    def user_exist(self):
-        users = User.objects.all()
-        if self.request in users:
-            return redirect('home')
-        pass
-
-    def user_activate(self):
-        profile = self.request.user.profile
-
+    def user_exist(self, user):
+        try:
+            if not user.is_active:
+                return False
+            return True
+        except User.DoesNotExist:
+            return False
 
     def post(self, request, *args, **kwargs):
         form = self.get_form()
-        print(request.POST)
 
         if form.is_valid():
             user = form.get_user()
             login(request, user)
             return redirect('home_redirect')
+
         else:
             return self.form_invalid(form)

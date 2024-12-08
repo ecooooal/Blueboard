@@ -1,0 +1,59 @@
+{% extends 'base/base.html' %}
+
+{% block layout %}
+<div class="flex flex-col gap-2">
+    <div >
+        <div class="flex flex-col h-16 shrink-0 w-full border-t border-gray-400" >
+            <div class="flex p-4 ">
+                <a href="{% url 'kanban_page' kanban.uuid %}">
+                    <h1 class="text-gray-700 text-3xl font-bold">{{ kanban.title }}</h1>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="flex gap-5 px-4 h-screen overflow-x-auto">
+        {% for column in columns %}
+        <div class="flex flex-col h-96 shrink-0 w-96 bg-white border border-gray-500 border-4 rounded-md" >
+            <div class="h-full overflow-hidden p-4">
+                <div class="flex flex-col ">
+                    <h1 class=" text-blue-500 text-2xl font-bold">{{ column.title }}</h1>
+                    <p class="text-gray-500 text-xs">Card Limit: {{ column.card_limit }} </p>
+                </div>
+                    <div class="flex flex-col gap-2 mt-4 w-full h-64 overflow-y-auto  ">
+                        {% for card in column.cards.all %}
+                        <div    hx-get="{% url 'card_detail' kanban.uuid card.id %}"
+                                hx-trigger="click"
+                                hx-target="#boardContent"
+                                hx-swap="innerHTML"
+                                data-modal-target="boardModal"
+                                data-modal-toggle="boardModal"
+                                class="flex flex-col max-h-24 w-full p-4 bg-white border border-gray-500 border-2 rounded-md hover:bg-gray-100" >
+                            <div class="flex flex-col  ">
+                                <label class="text-blue-500 text-lg font-bold"> {{card.title}}  </label>
+                                <label class="text-gray-500 truncate-50 text-xs"> {{card.description|truncatechars:50}} </label>
+                            </div>
+                        </div>
+                       {% endfor %}
+                    </div>
+            </div>
+            <a href="#" class="flex mt-auto w-full p-2 bg-white hover:bg-gray-200">
+                <h1 class="text-blue-500 text-base font-semibold">+ Add Card</h1>
+            </a>
+        </div>
+        {% endfor %}
+        <div class="flex h-12 shrink-0 w-28 bg-white border border-gray-500 border-4 rounded-md" >
+            <a href="#" class="flex mt-auto p-2 bg-white hover:bg-gray-200">
+                <h1 class="text-blue-500 text-base font-semibold">+ Add Card</h1>
+            </a>
+        </div>
+    </div>
+</div>
+
+<div id="boardModal" _="on closeModal add .closing then wait for animationend then remove me"  tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
+    <div id="boardContent" class="relative w-full max-w-4xl max-h-full">
+    </div>
+</div>
+
+
+
+{% endblock %}

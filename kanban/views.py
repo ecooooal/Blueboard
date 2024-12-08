@@ -2,33 +2,25 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django_htmx.http import retarget
 from django.contrib import messages
-from django.core.exceptions import ValidationError
 from .forms import *
 from .selectors import *
 from .services import *
 from .models import *
-from profiles.models import Profile
-
-
-
-
 
 def home_view(request):
     if request.user.is_authenticated:
         my_kanbans = get_kanbans(request.user)
-        participating_kanbans = participating_kanban(request.user)
-
+        participating_kanbans = KanbanMember.objects.participating_kanban(request.user)
+        for kanban in participating_kanbans:
+            print(kanban, kanban.is_active)
         context = {
             'kanbans': my_kanbans,
             'participating': participating_kanbans
         }
-        for kanban in participating_kanbans:
-            print(kanban.kanban.uuid)
 
         return render(request, 'homepage.html', context)
     else:
         return render(request, 'homepage.html')
-
 
 def kanban_page_view(request, uuid:Kanban.uuid):
     kanban = get_object_or_404(Kanban, uuid=uuid)
@@ -125,3 +117,26 @@ def kanban_delete_view(request, uuid):
     else:
         return render(request, 'kanban/kanban_delete.html', context)
     return redirect('home')
+
+def kanban_board_view(request, uuid):
+    kanban = get_object_or_404(Kanban, uuid=uuid)
+    kanban2 = Kanban.objects.prefetch_related('columns').prefetch_related('columns__cards').get(uuid=uuid)
+    columns = kanban2.columns.all()
+    context = {
+        'kanban':kanban,
+        'columns':columns
+    }
+    return render(request, 'kanban/kanban_board.html', context)
+
+def card_detail_view(request, card_id, uuid):
+    kanban = get_object_or_404(Kanban, uuid=uuid)
+    print(kanban)
+    card = get_object_or_404(Card, id=card_id)
+    print(card)
+    context = {
+        'kanban': kanban,
+        'card': card,
+    }
+    print(type(card.id))
+    response = render(request, 'kanban/card_detail.html', context)
+    return retarget(response, '#boardContent')
