@@ -49,7 +49,11 @@ module.exports = {
               current: 'currentColor',
               'primaryBlue': '#1976D2',
               'white': '#FFFFFF',
-              'secondaryBlue': '#BBDEFB',
+              'secondaryBlue': {
+                                light: '#BBDEFB',
+                                DEFAULT: '#BBDEFB',
+                                dark: '#BBDEFB',
+                              },
               'tertiaryOrange':{
                                 light: '#FFC670',
                                 DEFAULT: '#FFC670',

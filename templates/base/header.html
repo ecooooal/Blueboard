@@ -1,5 +1,5 @@
 <header hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'
-        class="flex items-center justify-between [&>*]:px-8 bg-primaryBlue dark:bg-gray-700 h-20 text-white sticky top-0 z-40">
+        class="flex items-center justify-between [&>*]:px-8 bg-primaryBlue dark:bg-gray-800 h-20 text-white sticky top-0 z-40">
     <logo-container class="flex items-center gap-5 justify-between h-20">
         <logo>
             <a class="flex items-center gap-2" href="/">
@@ -12,7 +12,7 @@
         </logo>
         {% if user.is_authenticated %}
         <user-container class="flex gap-5">
-            <a class="items-center font-medium rounded-lg text-sm  text-center text-tertiaryOrange cursor-pointer"
+            <a class="items-center font-medium rounded-lg text-sm  text-center text-tertiaryOrange dark:text-secondaryBlue cursor-pointer"
                 hx-get="{% url 'kanban_create' %}"
                 hx-trigger="click"
                 hx-target="#kanbanContent"
@@ -26,11 +26,11 @@
     </logo-container>
     {% if user.is_authenticated %}
     <user-container class="flex gap-5">
-        <a class="items-center font-medium rounded-lg text-sm text-center text-tertiaryOrange"
+        <a class="items-center font-medium rounded-lg text-sm text-center text-tertiaryOrange dark:text-secondaryBlue"
            href="{% url 'profile' %}">
             My Profile
         </a>
-        <a class="items-center font-medium rounded-lg text-sm  text-center cursor-pointer"
+        <a class="items-center font-medium rounded-lg text-sm  text-center text-gray-100 dark:text-gray-400 cursor-pointer"
             hx-get="{% url 'account_logout' %}"
             hx-trigger="click"
             hx-target="#modalContent"
@@ -52,7 +52,7 @@
             data-modal-toggle="loginModal">
             Log in
         </a>
-        <a class="items-center font-medium rounded-lg text-sm text-center cursor-pointer" href="/">
+        <a class="items-center font-medium rounded-lg text-sm text-center text-gray-200 dark:text-gray-400 cursor-pointer" href="/">
             Sign Up
         </a>
     </user-container>
