@@ -1,6 +1,6 @@
 <div>
    <profile-header class="flex-col">
-      <div class="m-4 text-3xl font-semibold text-blue-500">My Profile</div>
+      <div class="m-4 text-3xl font-semibold text-blue-500 dark:text-secondaryBlue ">My Profile</div>
       <hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700">
    </profile-header>
    <div class="mb-6">
@@ -12,11 +12,11 @@
                      hx-swap="outerHTML">
                <div class="flex grow items-stretch">
                   <div class="flex flex-row gap-8">
-                     <ppicture class="place-self-center"> <span class="text-blue-500">Profile Picture </span> : </ppicture>
+                     <ppicture class="place-self-center"> <span class="text-blue-500 dark:text-secondaryBlue">Profile Picture :  </span></ppicture>
                      <div class=""><img src="{{ user.profile.profile_picture.url }}" class="overflow-hidden rounded-full w-36 h-36"></div>
 
                   </div>
-                 <button type="button" class="ml-auto text-blue-600"
+                 <button type="button" class="ml-auto text-blue-600 dark:text-tertiaryOrange"
                      hx-get="{% url 'profile_picture_edit' %}">
                      Update
                  </button>
@@ -31,11 +31,11 @@
                      hx-swap="outerHTML">
                <div id="nameDiv" class="flex grow items-stretch">
                   <div class="flex flex-row gap-2">
-                     <full-name><span class="text-blue-500">Full Name </span> : </full-name>
-                     <first-name><label class="text-gray-400">{{ user.first_name }}</label></first-name>
-                     <last-name><label class="text-gray-400">{{ user.last_name }}</label></last-name>
+                     <full-name><label class="text-blue-500 dark:text-secondaryBlue">Full Name  : </label></full-name>
+                     <first-name><label class="text-gray-700 dark:text-secondaryBlue">{{ user.first_name }}</label></first-name>
+                     <last-name><label class="text-gray-700 dark:text-secondaryBlue">{{ user.last_name }}</label></last-name>
                   </div>
-                 <button type="button" class="ml-auto text-blue-600"
+                 <button type="button" class="ml-auto text-blue-600 dark:text-tertiaryOrange"
                      hx-get="{% url 'profile_detail_edit' %}">
                      Update
                  </button>
@@ -50,10 +50,10 @@
                      hx-swap="outerHTML">
                <div class="flex grow items-stretch">
                   <div class="flex flex-row gap-2">
-                     <bio><span class="text-blue-500">Bio </span> : </bio>
-                     <biography><label class="text-gray-400">{{ profile.bio }}</label></biography>
+                     <bio><span class="text-blue-500 dark:text-secondaryBlue">Bio  : </span></bio>
+                     <biography><label class="text-gray-700 dark:text-secondaryBlue">{{ profile.bio }}</label></biography>
                   </div>
-                 <button type="button" class="ml-auto text-blue-600"
+                 <button type="button" class="ml-auto text-blue-600 dark:text-tertiaryOrange"
                      hx-get="{% url 'profile_bio_edit' %}">
                      Update
                  </button>
